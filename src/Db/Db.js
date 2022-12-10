@@ -2,7 +2,7 @@ const mysql = require('promise-mysql');
 const config = require('../../config');
 
 class DB {
-    async getConnection() {
+    getConnection() {
         return mysql.createPool({
             host: config.host,
             user: config.user,

@@ -1,7 +1,14 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const cors = require('cors');
+const { json } = require('express');
+const app = express();
+const port = process.env.port || 3000
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.use(cors());
+app.use(json());
 
-app.listen(port, () => console.log());
+app.get('/', async (req, res) => {
+    res.send("Welcome")
+})
+
+app.listen(port);

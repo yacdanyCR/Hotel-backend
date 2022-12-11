@@ -4,7 +4,6 @@ const UserRoute = express.Router();
 
 const user = new UserController();
 
-UserRoute.get(('/'), user.getUser);
 UserRoute.post(('/'), user.addUser);
 UserRoute.post(('/login'), user.authUser);
 

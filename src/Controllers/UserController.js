@@ -4,17 +4,6 @@ const bcrypt = require('bcrypt');
 
 const db = new DB();
 class UserController {
-    async getUser(req, res) {
-        const connection = await db.getConnection();
-        try {
-            const result = await connection.query("SELECT * FROM user");
-            res.json(result);
-        } catch (error) {
-
-        } finally {
-            connection.end();
-        }
-    }
 
     async authUser(req, res) {
         const connection = await db.getConnection();

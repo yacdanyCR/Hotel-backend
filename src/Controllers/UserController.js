@@ -32,11 +32,17 @@ class UserController {
             const hashPassword = await user.bcryptPassword(password);
             user.setPassword(hashPassword);
 
-            const result = await connection.query(`INSERT INTO user (username,password) VALUES ('${user.getName()}','${user.getPassword()}')`);
-            res.status(200).json(result);
+            const userExist = await connection.query(`SELECT * FROM user WHERE username="${username}"`);
+
+            if (userExist.length > 0) {
+                res.status(200).json({ created: false });
+            } else {
+                const result = await connection.query(`INSERT INTO user (username,password) VALUES ('${user.getName()}','${user.getPassword()}')`);
+                res.status(200).json({ created: true });
+            }
 
         } catch (error) {
-
+            res.status(400);
         } finally {
             connection.end();
         }

@@ -21,6 +21,7 @@ class UserController {
         try {
             const { username, password } = req.body;
             const result = await connection.query(`SELECT * FROM user WHERE username="${username}"`);
+
             if (result.length > 0) {
                 if (await bcrypt.compare(password, result[0]['password'])) {
                     res.status(200).json({ auth: true });

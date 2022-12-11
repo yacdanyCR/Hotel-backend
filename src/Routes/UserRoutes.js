@@ -6,7 +6,7 @@ const user = new UserController();
 
 UserRoute.get(('/'), user.getUser);
 UserRoute.post(('/'), user.addUser);
-UserRoute.get(('/login'), user.authUser);
+UserRoute.post(('/login'), user.authUser);
 
 module.exports = {
     UserRoute

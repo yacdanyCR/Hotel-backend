@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { json } = require('express');
 const { UserRoute } = require('./Routes/UserRoutes');
+const { GuestRoute } = require('./Routes/GuestRoute');
 const app = express();
 const port = process.env.port || 3000
 
@@ -9,5 +10,6 @@ app.use(cors());
 app.use(json());
 
 app.use(('/api/user'), UserRoute);
+app.use(('/api/guest'), GuestRoute);
 
 app.listen(port);

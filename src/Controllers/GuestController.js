@@ -29,7 +29,7 @@ class GuestController {
             const resultGuest = await connection.query(`INSERT INTO guest (name,lastname,phone,birthdate,country) VALUES ("${guest.getName()}","${guest.getLastname()}","${guest.getPhone()}","${guest.getBirthdate()}","${guest.getCountry()}")`);
 
             booking.setIdGuest(resultGuest.insertId);
-            const resultBooking = await connection.query(`INSERT INTO bookings (id_guest,check_in,check_out,payment) VALUES (${booking.getIdGuest()},"${booking.getCheckIn()}","${booking.getCheckOut()}","${booking.getPayment()}")`)
+            await connection.query(`INSERT INTO bookings (id_guest,check_in,check_out,payment) VALUES (${booking.getIdGuest()},"${booking.getCheckIn()}","${booking.getCheckOut()}","${booking.getPayment()}")`)
 
             res.status(200).json(resultGuest);
         } catch (error) {
@@ -58,6 +58,20 @@ class GuestController {
         try {
             const { id } = req.params;
             const result = await connection.query(`DELETE FROM guest WHERE id = ${id}`);
+            res.status(200).json(result);
+        } catch (error) {
+
+        } finally {
+            connection.end();
+        }
+    }
+
+    async serchGuest(req, res) {
+        const connection = await db.getConnection();
+        try {
+            const { search } = req.params
+            const result = await connection.query(`SELECT * FROM guest WHERE name LIKE "%${search}%"`);
+
             res.status(200).json(result);
         } catch (error) {
 

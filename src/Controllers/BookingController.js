@@ -14,6 +14,20 @@ class BookingController {
             connection.end();
         }
     }
+
+
+    async deleteBooking(req, res) {
+        const connection = await db.getConnection();
+        try {
+            const { id } = req.params;
+            const result = await connection.query(`DELETE FROM bookings WHERE id_guest = ${id}`);
+            res.status(200).json(result);
+        } catch (error) {
+
+        } finally {
+            connection.end();
+        }
+    }
 }
 
 module.exports = {

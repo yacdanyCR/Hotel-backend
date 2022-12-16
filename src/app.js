@@ -5,7 +5,7 @@ const { UserRoute } = require('./Routes/UserRoutes');
 const { GuestRoute } = require('./Routes/GuestRoute');
 const { BookingRoute } = require('./Routes/BookingsRouter');
 const app = express();
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 
 app.use(cors());
 app.use(json());
